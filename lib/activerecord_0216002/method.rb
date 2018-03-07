@@ -67,5 +67,9 @@ module ActiveRecord
       find_by_sql("SELECT * FROM #{table_name} WHERE id = #{id.to_i}").first
     end
 
+    #4
+    def where(*args)
+      Relation.new(self).where(*args)
+    end
   end
 end
