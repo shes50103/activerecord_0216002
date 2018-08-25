@@ -24,15 +24,13 @@ module ActiveRecord
    
     #1
     def define_method_attribute(name)
-      class_eval <<-STR
-        def #{name}
-          @attributes[:#{name}] || @attributes["#{name}"]
-        end
+      define_method name do
+        @attributes[name.to_sym] || @attributes["#{name}"]
+      end
 
-        def #{name}=(value)
-          @attributes[:#{name}] = value
-        end
-      STR
+      define_method "#{name}=" do |value|
+        @attributes[name.to_sym] = value
+      end
     end
 
     #1
